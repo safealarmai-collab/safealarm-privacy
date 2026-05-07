@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safe Alarm AI – Gizlilik Politikası</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #111820;
+    --border: #1e2a38;
+    --accent: #3b8ef3;
+    --accent-dim: rgba(59,142,243,0.12);
+    --text: #c9d4e0;
+    --text-muted: #5a7290;
+    --heading: #e8f0fa;
+    --green: #2ecc8a;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+    min-height: 100vh;
+  }
+  /* Subtle grid bg */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,142,243,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,142,243,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(59,142,243,0.07) 0%, transparent 100%);
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(59,142,243,0.25);
+    border-radius: 999px;
+    padding: 6px 16px 6px 10px;
+    margin-bottom: 28px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .logo-badge span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 600;
+    color: var(--heading);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .subtitle strong { color: var(--accent); font-weight: 500; }
+
+  /* Container */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Sections */
+  section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+  section:hover { border-color: rgba(59,142,243,0.3); }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  p { margin-bottom: 12px; color: var(--text); }
+  p:last-child { margin-bottom: 0; }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+  }
+  ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  ul li:last-child { border-bottom: none; }
+  ul li::before {
+    content: '→';
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .highlight-box {
+    background: var(--accent-dim);
+    border: 1px solid rgba(59,142,243,0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #8ab8f5;
+  }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  @media (max-width: 500px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-item {
+    background: rgba(59,142,243,0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .contact-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 4px;
+  }
+  .contact-item .value {
+    font-size: 14px;
+    color: var(--heading);
+    font-weight: 500;
+  }
+  .contact-item .value a { color: var(--accent); text-decoration: none; }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer span { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">
+    <div class="logo-dot"></div>
+    <span>Safe Alarm AI</span>
+  </div>
+  <h1>Gizlilik Politikası</h1>
+  <p class="subtitle">Son güncelleme: <strong>Mayıs 2026</strong> &nbsp;·&nbsp; Versiyon 1.0</p>
+</header>
+
+<main>
+
+  <section>
+    <div class="section-num">01</div>
+    <h2>Genel Bakış</h2>
+    <p>Safe Alarm AI ("uygulama"), güvenlik kamerası sistemlerinizi izlemenizi ve alarm bildirimlerini yönetmenizi sağlayan profesyonel bir mobil uygulamadır. Bu gizlilik politikası, uygulamamızın hangi verileri topladığını, nasıl kullandığını ve koruduğunu açıklamaktadır.</p>
+    <p>Uygulamayı kullanarak bu politikayı kabul etmiş sayılırsınız.</p>
+  </section>
+
+  <section>
+    <div class="section-num">02</div>
+    <h2>Toplanan Veriler</h2>
+    <p>Uygulama aşağıdaki verileri toplar:</p>
+    <ul>
+      <li>Hesap bilgileri (kullanıcı adı ve şifreli giriş kimlik bilgileri — kimlik doğrulama amacıyla)</li>
+      <li>Cihaz kimliği ve push notification token (alarm bildirimleri göndermek için)</li>
+      <li>DVR/NVR bağlantı bilgileri (kamera sisteminize bağlanmak için)</li>
+      <li>Uygulama kullanım verileri (hata tespiti ve performans iyileştirme için)</li>
+    </ul>
+    <div class="highlight-box">
+      📷 Kamera görüntüleri yalnızca sizin DVR/NVR cihazınızdan anlık olarak aktarılır. Görüntüler sunucularımızda depolanmaz veya üçüncü taraflarla paylaşılmaz.
+    </div>
+  </section>
+
+  <section>
+    <div class="section-num">03</div>
+    <h2>Verilerin Kullanımı</h2>
+    <p>Toplanan veriler yalnızca aşağıdaki amaçlarla kullanılır:</p>
+    <ul>
+      <li>Kullanıcı kimlik doğrulaması ve güvenli oturum yönetimi</li>
+      <li>Hareket algılama ve güvenlik olaylarında push bildirim gönderimi</li>
+      <li>DVR/NVR sistemleriyle canlı bağlantı kurulması</li>
+      <li>Uygulama performansının iyileştirilmesi ve hata ayıklama</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-num">04</div>
+    <h2>Veri Paylaşımı</h2>
+    <p>Kişisel verileriniz hiçbir koşulda üçüncü taraflara satılmaz veya kiralanmaz.</p>
+    <ul>
+      <li>Firebase (Google) — yalnızca push bildirim iletimi için kullanılır</li>
+      <li>Tailscale VPN — şifreli ağ tüneli, veri depolamaz</li>
+      <li>Yasal zorunluluk durumunda yetkili makamlarla sınırlı paylaşım yapılabilir</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-num">05</div>
+    <h2>Veri Güvenliği</h2>
+    <p>Verilerinizin güvenliği için şu önlemler alınmaktadır:</p>
+    <ul>
+      <li>HTTPS/TLS ile şifreli veri iletimi</li>
+      <li>Tailscale VPN ile güvenli uzaktan erişim</li>
+      <li>Şifreler hash'lenerek saklanır, açık metin olarak tutulmaz</li>
+      <li>Kamera görüntüleri sunucularımızda kaydedilmez</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-num">06</div>
+    <h2>Kullanıcı Hakları</h2>
+    <p>Aşağıdaki haklara sahipsiniz:</p>
+    <ul>
+      <li>Hesabınıza ait kişisel verilere erişim talep etme</li>
+      <li>Yanlış veya eksik verilerin düzeltilmesini isteme</li>
+      <li>Hesabınızın ve ilgili verilerin silinmesini talep etme</li>
+      <li>Push bildirimlerini istediğiniz zaman devre dışı bırakma</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-num">07</div>
+    <h2>Çocukların Gizliliği</h2>
+    <p>Safe Alarm AI, profesyonel kullanım için tasarlanmış bir uygulamadır. 13 yaşın altındaki kişilerden bilerek veri toplanmaz. Böyle bir durumun farkına varırsak ilgili verileri derhal sileriz.</p>
+  </section>
+
+  <section>
+    <div class="section-num">08</div>
+    <h2>İletişim</h2>
+    <p>Gizlilik politikamızla ilgili sorularınız için bizimle iletişime geçebilirsiniz:</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="label">Uygulama</div>
+        <div class="value">Safe Alarm AI</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">E-posta</div>
+        <div class="value"><a href="mailto:destek@safealarm.ai">destek@safealarm.ai</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Geliştirici</div>
+        <div class="value">Feridun Aslan</div>
+      </div>
+      <div class="contact-item">
+        <div class="label">Ülke</div>
+        <div class="value">Türkiye</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 <span>Safe Alarm AI</span> — Tüm hakları saklıdır.
+</footer>
+
+</body>
+</html>
